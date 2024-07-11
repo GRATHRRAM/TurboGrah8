@@ -11,8 +11,8 @@
 #define G   0x7
 #define H   0x8
 #define cp  0x9 //if return val 
-#define ic  0xA //instruction counter
-#define ic2 0xB
+#define icl 0xA //instruction counter
+#define ich 0xB
 #define bs  0xC //bus none/read/write
 
 

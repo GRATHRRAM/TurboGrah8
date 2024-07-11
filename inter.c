@@ -5,9 +5,10 @@
 
 void WriteBus(uint8_t *RAM, Color *Screen, uint16_t adress, uint16_t value);
 uint16_t ReadBus(uint8_t *RAM, Color *Screen, uint16_t adress);
-void Interpreter(uint8_t *RAM, uint8_t *REGS, Color *Screen, uint8_t instruction[4]);
+void DoInstruction(uint8_t *RAM, uint8_t *REGS, Color *Screen, uint8_t instruction[4]);
 
 uint8_t u16TOu8(uint16_t value);
+uint16_t u8TOu16(uint8_t high, uint8_t low);
 
 void WriteBus(uint8_t *RAM, Color *Screen, uint16_t adress, uint16_t value) {
 	if(adress <= 0x0200) RAM[adress] = u16TOu8(value);
@@ -18,11 +19,16 @@ uint16_t ReadBus(uint8_t *RAM, Color *Screen, uint16_t adress) {
 	return 0;
 }
 
-void Interpreter(uint8_t *RAM, uint8_t *REGS, Color *Screen, uint8_t instruction[4]) {
-	
-
+void DoInstruction(uint8_t *RAM, uint8_t *REGS, Color *Screen, uint8_t instruction[4]) {
+	if(instruction[0] == m_imm) _imm(REGS, instruction[1], instruction[3]);
+	if(instruction[0] == m_mov) _mov(REGS, instruction[1], instruction[3]);
+	if(instruction[0] == m_add) _add(REGS, instruction[1], instruction[2], instruction[3]);
 }
 
 uint8_t u16TOu8(uint16_t value) {
 	return value & 0x00FF;
 }
+
+uint16_t u8TOu16(uint8_t high, uint8_t low) {
+	return (uint16_t) high << 8 | low;
+} 

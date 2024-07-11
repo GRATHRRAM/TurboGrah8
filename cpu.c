@@ -11,8 +11,8 @@
 #define G   0x7
 #define H   0x8
 #define cp  0x9 //if return val 
-#define ic  0xA //instruction counter
-#define ic2 0xB
+#define icl  0xA //instruction counter
+#define ich 0xB
 #define bs  0xC //bus none/read/write
 
 void _imm (uint8_t *REGS,uint8_t value,  uint8_t return_adress);                   //0x00  Immidiet value
@@ -41,23 +41,23 @@ void _jnz (uint8_t *REGS,uint8_t address1,uint8_t address2);                    
 
 void _imm (uint8_t *REGS,uint8_t value,  uint8_t return_adress)                    {REGS[return_adress] = value;}
 void _mov (uint8_t *REGS,uint8_t address1,uint8_t return_adress)                   {REGS[return_adress] = REGS[address1];}
-void _add (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] + REGS[address2];}
-void _sub (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] - REGS[address2];}
-void _mul (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] * REGS[address2];}
-void _div (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] / REGS[address2];}
-void _not (uint8_t *REGS,uint8_t address1,uint8_t return_adress)                   {REGS[return_adress] = ~REGS[address1];}
-void _and (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] & REGS[address2];}
-void _nand(uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = ~(REGS[address1] & REGS[address2]);}
-void _or  (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] | REGS[address2];}
-void _nor (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = ~(REGS[address1] | REGS[address2]);}
-void _xor (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] ^ REGS[address2];}
-void _nxor(uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = ~(REGS[address1] ^ REGS[address2]);}
-void _shl (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] >> REGS[address2];}
-void _shr (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = REGS[address1] << REGS[address2];}
+void _add (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] + REGS[address2];}
+void _sub (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] - REGS[address2];}
+void _mul (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] * REGS[address2];}
+void _div (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] / REGS[address2];}
+void _not (uint8_t *REGS,uint8_t address1,uint8_t return_adress)                   {REGS[return_adress] = (uint8_t) ~REGS[address1];}
+void _and (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] & REGS[address2];}
+void _nand(uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) ~(REGS[address1] & REGS[address2]);}
+void _or  (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] | REGS[address2];}
+void _nor (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) ~(REGS[address1] | REGS[address2]);}
+void _xor (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] ^ REGS[address2];}
+void _nxor(uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) ~(REGS[address1] ^ REGS[address2]);}
+void _shl (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] >> REGS[address2];}
+void _shr (uint8_t *REGS,uint8_t address1,uint8_t address2, uint8_t return_adress) {REGS[return_adress] = (uint8_t) REGS[address1] << REGS[address2];}
 
 void _cmp (uint8_t *REGS,uint8_t address1,uint8_t address2)          {if(REGS[address1] == REGS[address2]) REGS[cp] = 1;else REGS[cp] = 1;}
 void _big (uint8_t *REGS,uint8_t address1,uint8_t address2)          {if(REGS[address1] > REGS[address2]) REGS[cp] = 1;else REGS[cp] = 1;}
 void _sml (uint8_t *REGS,uint8_t address1,uint8_t address2)          {if(REGS[address1] < REGS[address2]) REGS[cp] = 1;else REGS[cp] = 1;}
-void _jmp (uint8_t *REGS,uint8_t address1,uint8_t address2)          {REGS[ic] = address1; REGS[ic2] = address2;}
-void _jiz (uint8_t *REGS,uint8_t address1,uint8_t address2)          {if(cp==0) {REGS[ic] = address1;REGS[ic2]=address2;}}
-void _jnz (uint8_t *REGS,uint8_t address1,uint8_t address2) 		 {if(cp!=0) {REGS[ic] = address1;REGS[ic2]=address2;}}
+void _jmp (uint8_t *REGS,uint8_t address1,uint8_t address2)          {REGS[icl] = address1; REGS[ich] = address2;}
+void _jiz (uint8_t *REGS,uint8_t address1,uint8_t address2)          {if(cp==0) {REGS[icl] = address1;REGS[ich]=address2;}}
+void _jnz (uint8_t *REGS,uint8_t address1,uint8_t address2) 		 {if(cp!=0) {REGS[icl] = address1;REGS[ich]=address2;}}
