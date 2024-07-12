@@ -35,7 +35,7 @@ int main(void) {
 
 	while(!WindowShouldClose()) {
 		
-		system("clear");
+		//system("clear");
 		for(uint16_t i = 0; i < 0x14; ++i) {
 			printf("REG $%hx; Val $%hx;\n",i,REGS[i]);
 		}
