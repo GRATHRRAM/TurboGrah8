@@ -1,3 +1,5 @@
+#ifndef CPU_H
+#define CPU_H
 #include <stdint.h>
 
 //registers
@@ -59,3 +61,4 @@ void _sml (uint8_t *REGS,uint8_t address1,uint8_t address2);                    
 void _jmp (uint8_t *REGS,uint8_t address1,uint8_t address2);                       //0x12  ic = reg_val(0x00ff) + reg2_val(0xff00)
 void _jiz (uint8_t *REGS,uint8_t address1,uint8_t address2);                       //0x13  if(cp == 0) jmp
 void _jnz (uint8_t *REGS,uint8_t address1,uint8_t address2);                       //0x14  if(cp != 0) jmp
+#endif
